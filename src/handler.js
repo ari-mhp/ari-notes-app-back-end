@@ -140,11 +140,16 @@ const editNoteByIdHandler = (request, h) => {
 
 
 const deleteNoteByIdHandler = (request, h) => {
+  // dapatkan id dari request
   const {id} = request.params;
 
+  // dapatkan index notesnya dari id yg diberikan
   const index = notes.findIndex((note) => note.id === id);
 
+  // Kalo index (-1) artinya gagal ditemukan
   if (index !== -1) {
+    // untuk menghapus notes menggunakan fungsi splice
+    // splice("awal item yg dihapus", "jumlah item yg dihapus")
     notes.splice(index, 1);
     const response = h.response({
       status: 'success',
@@ -152,14 +157,14 @@ const deleteNoteByIdHandler = (request, h) => {
     });
     response.code(200);
     return response;
+  } else {
+    const response = h.response({
+      status: 'fail',
+      message: 'Catatan gagal dihapus. Id tidak ditemukan',
+    });
+    response.code(404);
+    return response;
   }
-
-  const response = h.response({
-    status: 'fail',
-    message: 'Catatan gagal dihapus. Id tidak ditemukan',
-  });
-  response.code(404);
-  return response;
 };
 
 module.exports = {
