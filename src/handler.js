@@ -144,7 +144,7 @@ const deleteNoteByIdHandler = (request, h) => {
   const {id} = request.params;
 
   // dapatkan index notesnya dari id yg diberikan
-  const index = notes.findIndex((note) => note.id === id);
+  const index = notes.findIndex((note) => note.id === id );
 
   // Kalo index (-1) artinya gagal ditemukan
   if (index !== -1) {
